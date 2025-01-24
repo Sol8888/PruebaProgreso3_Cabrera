@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
+using PruebaProgreso3_Cabrera.Models;
+using PruebaProgreso3_Cabrera.Servicios;
 
 namespace PruebaProgreso3_Cabrera.ViewModels
 {
@@ -53,8 +56,9 @@ namespace PruebaProgreso3_Cabrera.ViewModels
                 }
 
                 var aeropuerto = respuesta.First();
-                // Guardar en SQLite (se implementará más adelante)
-                // await GuardarAeropuertoAsync(aeropuerto);
+
+                await _baseDeDatos.GuardarAeropuertoAsync(aeropuerto);
+
 
                 Mensaje = $"Aeropuerto encontrado: {aeropuerto.Nombre}";
             }
