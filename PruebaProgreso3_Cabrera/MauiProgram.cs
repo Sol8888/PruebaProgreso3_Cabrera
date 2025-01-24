@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PruebaProgreso3_Cabrera.Servicios;
 
 namespace PruebaProgreso3_Cabrera
 {
@@ -15,8 +16,10 @@ namespace PruebaProgreso3_Cabrera
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<BaseDeDatos>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

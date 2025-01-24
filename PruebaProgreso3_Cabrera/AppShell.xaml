@@ -4,12 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PruebaProgreso3_Cabrera"
-    Shell.FlyoutBehavior="Flyout"
-    Title="PruebaProgreso3_Cabrera">
+    Shell.FlyoutBehavior="Disabled"
+    Title="Soledad Cabrera">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        
+        <ShellContent
+            Title="Buscador"
+            ContentTemplate="{DataTemplate local:BuscadorAeropuertosPage}"
+            Route="BuscadorAeropuertosPage" />
 
+        
+        <ShellContent
+            Title="Lista"
+            ContentTemplate="{DataTemplate local:ListaAeropuertosPage}"
+            Route="ListaAeropuertosPage" />
+    </TabBar>
+    
 </Shell>
