@@ -9,7 +9,6 @@ public partial class ListaAeropuertosPage : ContentPage
 	public ListaAeropuertosPage(BaseDeDatos baseDeDatos)
 	{
 		InitializeComponent();
-
         BindingContext = new ListaAeropuertos(baseDeDatos);
     }
 }

@@ -13,7 +13,7 @@ namespace PruebaProgreso3_Cabrera
             Routing.RegisterRoute(nameof(BuscadorAeropuertosPage), typeof(BuscadorAeropuertosPage));
             Routing.RegisterRoute(nameof(ListaAeropuertosPage), typeof(ListaAeropuertosPage));
 
-            // Pasar la instancia de BaseDeDatos a las páginas
+            
             Items.Add(new ShellContent
             {
                 Title = "Buscador",
