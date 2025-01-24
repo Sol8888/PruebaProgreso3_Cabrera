@@ -14,12 +14,14 @@ namespace PruebaProgreso3_Cabrera.ViewModels
     {
         private readonly BaseDeDatos _baseDeDatos;
         public ObservableCollection<Aeropuerto> Aeropuertos { get; } = new ObservableCollection<Aeropuerto>();
-        public ListaAeropuertos()
+
+        public ListaAeropuertos(BaseDeDatos baseDeDatos)
         {
             _baseDeDatos = baseDeDatos;
             CargarAeropuertos();
         }
-        private void CargarAeropuertos()
+
+        private async void CargarAeropuertos()
         {
             var aeropuertos = await _baseDeDatos.ObtenerAeropuertosAsync();
             Aeropuertos.Clear();
@@ -28,6 +30,5 @@ namespace PruebaProgreso3_Cabrera.ViewModels
                 Aeropuertos.Add(aeropuerto);
             }
         }
-
     }
 }

@@ -10,31 +10,25 @@ using PruebaProgreso3_Cabrera.Servicios;
 
 namespace PruebaProgreso3_Cabrera.ViewModels
 {
+
     public class BuscadorAeropuertos : BaseViewModel
     {
         private readonly BaseDeDatos _baseDeDatos;
+        private readonly HttpClient cliente = new HttpClient();
         private string _consulta;
-        public string Consulta
-        {
-            get => _consulta;
-            set => AsignarPropiedad(ref _consulta, value);
-        }
+        public string Consulta { get => _consulta; set => AsignarPropiedad(ref _consulta, value); }
 
         private string _mensaje;
-        public string Mensaje
-        {
-            get => _mensaje;
-            set => AsignarPropiedad(ref _mensaje, value);
-        }
+        public string Mensaje { get => _mensaje; set => AsignarPropiedad(ref _mensaje, value); }
 
         public Command ComandoBuscar { get; }
         public Command ComandoLimpiar { get; }
 
-        public BuscadorAeropuertos()
+        public BuscadorAeropuertos(BaseDeDatos baseDeDatos)
         {
             _baseDeDatos = baseDeDatos;
             ComandoBuscar = new Command(async () => await BuscarAeropuertoAsync());
-            ComandoLimpiar = new Command(() => Consulta = string.Empty);
+            ComandoLimpiar = new Command(() => { Consulta = string.Empty; Mensaje = string.Empty; });
         }
 
         private async Task BuscarAeropuertoAsync()
@@ -47,10 +41,7 @@ namespace PruebaProgreso3_Cabrera.ViewModels
 
             try
             {
-                using var cliente = new HttpClient();
-                var respuesta = await cliente.GetFromJsonAsync<List<Aeropuerto>>(
-                    $"https://freetestapi.com/api/v1/airports?search={Consulta}&limit=1");
-
+                var respuesta = await cliente.GetFromJsonAsync<List<Aeropuerto>>($"https://freetestapi.com/api/v1/airports?search={Consulta}&limit=1");
                 if (respuesta == null || !respuesta.Any())
                 {
                     Mensaje = "No se encontraron aeropuertos.";
@@ -58,10 +49,7 @@ namespace PruebaProgreso3_Cabrera.ViewModels
                 }
 
                 var aeropuerto = respuesta.First();
-
                 await _baseDeDatos.GuardarAeropuertoAsync(aeropuerto);
-
-
                 Mensaje = $"Aeropuerto encontrado: {aeropuerto.Nombre}";
             }
             catch (Exception ex)
