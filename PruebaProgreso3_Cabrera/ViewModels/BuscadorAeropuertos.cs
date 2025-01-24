@@ -12,6 +12,7 @@ namespace PruebaProgreso3_Cabrera.ViewModels
 {
     public class BuscadorAeropuertos : BaseViewModel
     {
+        private readonly BaseDeDatos _baseDeDatos;
         private string _consulta;
         public string Consulta
         {
@@ -31,6 +32,7 @@ namespace PruebaProgreso3_Cabrera.ViewModels
 
         public BuscadorAeropuertos()
         {
+            _baseDeDatos = baseDeDatos;
             ComandoBuscar = new Command(async () => await BuscarAeropuertoAsync());
             ComandoLimpiar = new Command(() => Consulta = string.Empty);
         }
