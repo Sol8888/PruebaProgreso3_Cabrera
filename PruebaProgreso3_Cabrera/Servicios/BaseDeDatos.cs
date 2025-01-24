@@ -18,9 +18,16 @@ namespace PruebaProgreso3_Cabrera.Servicios
 
         public BaseDeDatos()
         {
-            var rutaDB = Path.Combine(FileSystem.AppDataDirectory, "scabrera_aeropuertos.db");
-            _conexion = new SQLiteAsyncConnection(rutaDB);
-            _conexion.CreateTableAsync<Aeropuerto>().Wait();
+            try
+            {
+                var rutaDB = Path.Combine(FileSystem.AppDataDirectory, "scabrera_aeropuertos.db");
+                _conexion = new SQLiteAsyncConnection(rutaDB);
+                _conexion.CreateTableAsync<Aeropuerto>().Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al inicializar la base de datos: {ex.Message}");
+            }
         }
 
         
